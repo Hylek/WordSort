@@ -21,7 +21,6 @@ namespace Editor.Tools
             _onExitRecordEndPositionButton;
 
         private Vector3Field _onStartVector3Start, _onStartVector3End, _onExitVector3Start, _onExitVector3End;
-        private Toggle _manualModeToggle;
 
         private SerializedProperty _entryMode, _exitMode;
         private GameObject _gameObject;
@@ -32,33 +31,33 @@ namespace Editor.Tools
             _gameObject = targetScript!.gameObject;
 
             var visualTree =
-                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/DylansDen/ToolingUI/UIAnimatorInspector.uxml");
+                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UIDocs/UIAnimatorInspector.uxml");
             _inspector = new VisualElement();
             visualTree.CloneTree(_inspector);
 
-            _onStartAnimMode = _inspector.Q<EnumField>("OnStartAnimMode");
+            _onStartAnimMode = _inspector.Q<EnumField>("EA-Mode");
             _onStartAnimMode.RegisterValueChangedCallback(OnStartAnimModeChanged);
 
-            _onExitAnimMode = _inspector.Q<EnumField>("OnExitAnimMode");
+            _onExitAnimMode = _inspector.Q<EnumField>("ExA-Mode");
             _onExitAnimMode.RegisterValueChangedCallback(OnExitAnimModeChanged);
 
-            _onStartFadePanel = _inspector.Q<VisualElement>("OnStartFadePanel");
-            _onStartScalePanel = _inspector.Q<VisualElement>("OnStartScalePanel");
-            _onStartMovePanel = _inspector.Q<VisualElement>("OnStartMovePanel");
+            _onStartFadePanel = _inspector.Q<VisualElement>("EA-Fade");
+            _onStartScalePanel = _inspector.Q<VisualElement>("EA-Scale");
+            _onStartMovePanel = _inspector.Q<VisualElement>("EA-Move");
 
-            _onExitFadePanel = _inspector.Q<VisualElement>("OnExitFadePanel");
-            _onExitScalePanel = _inspector.Q<VisualElement>("OnExitScalePanel");
-            _onExitMovePanel = _inspector.Q<VisualElement>("OnExitMovePanel");
+            _onExitFadePanel = _inspector.Q<VisualElement>("ExA-Fade");
+            _onExitScalePanel = _inspector.Q<VisualElement>("ExA-Scale");
+            _onExitMovePanel = _inspector.Q<VisualElement>("ExA-Move");
 
-            _onStartVector3Start = _inspector.Q<Vector3Field>("OnStartStartPosition");
-            _onStartVector3End = _inspector.Q<Vector3Field>("OnStartEndPosition");
-            _onExitVector3Start = _inspector.Q<Vector3Field>("OnExitStartPosition");
-            _onExitVector3End = _inspector.Q<Vector3Field>("OnExitEndPosition");
+            _onStartVector3Start = _inspector.Q<Vector3Field>("EA-StartPosition");
+            _onStartVector3End = _inspector.Q<Vector3Field>("EA-EndPosition");
+            _onExitVector3Start = _inspector.Q<Vector3Field>("ExA-StartPosition");
+            _onExitVector3End = _inspector.Q<Vector3Field>("ExA-EndPosition");
 
-            _onStartRecordStartPositionButton = _inspector.Q<Button>("OnStartRecordStartPosition");
-            _onStartRecordEndPositionButton = _inspector.Q<Button>("OnStartRecordEndPosition");
-            _onExitRecordStartPositionButton = _inspector.Q<Button>("OnExitRecordStartPosition");
-            _onExitRecordEndPositionButton = _inspector.Q<Button>("OnExitRecordEndPosition");
+            _onStartRecordStartPositionButton = _inspector.Q<Button>("EA-RecordStartPosition");
+            _onStartRecordEndPositionButton = _inspector.Q<Button>("EA-RecordEndPosition");
+            _onExitRecordStartPositionButton = _inspector.Q<Button>("ExA-RecordStartPosition");
+            _onExitRecordEndPositionButton = _inspector.Q<Button>("ExA-RecordEndPosition");
 
             _onStartRecordStartPositionButton.RegisterCallback<MouseUpEvent>(OnStartRecordStartPosition);
             _onStartRecordEndPositionButton.RegisterCallback<MouseUpEvent>(OnStartRecordEndPosition);
@@ -67,8 +66,6 @@ namespace Editor.Tools
 
             _entryMode = serializedObject.FindProperty("entryAnimation.mode");
             _exitMode = serializedObject.FindProperty("exitAnimation.mode");
-
-            _manualModeToggle = _inspector.Q<Toggle>("ManualMode");
 
             if (_entryMode.enumValueIndex == 0) // If Entry mode is set to Fade (0).
             {

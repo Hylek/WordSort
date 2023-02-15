@@ -1,3 +1,64 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
-    <ui:VisualElement name="Parent" />
+    <ui:VisualElement name="Parent" style="padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;">
+        <ui:VisualElement name="EntryAnimation" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; background-color: rgb(107, 174, 133); padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; -unity-slice-bottom: 0; margin-bottom: 10px;">
+            <ui:VisualElement name="EA-Core" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 10px;">
+                <ui:Label text="Entry Animation" display-tooltip-when-elided="true" name="EA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:EnumField label="Animation Mode" value="Center" name="EA-Mode" binding-path="entryAnimation.mode" />
+                <uie:FloatField label="Start Delay" value="0" name="EA-StartDelay" binding-path="entryAnimation.startDelay" />
+                <uie:FloatField label="End Delay" value="0" name="EA-EndDelay" binding-path="entryAnimation.endDelay" />
+            </ui:VisualElement>
+            <ui:VisualElement name="EA-Fade" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 10px; display: none;">
+                <ui:Label text="Fade Settings" display-tooltip-when-elided="true" name="EA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:FloatField label="Start Fade" value="0" name="EA-StartFade" binding-path="entryAnimation.startValue" />
+                <uie:FloatField label="End Fade" value="0" name="EA-EndFade" binding-path="entryAnimation.endValue" />
+                <uie:FloatField label="Fade Speed" value="0" name="EA-FadeSpeed" binding-path="entryAnimation.speedValue" />
+            </ui:VisualElement>
+            <ui:VisualElement name="EA-Scale" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 10px; display: none;">
+                <ui:Label text="Scale Settings" display-tooltip-when-elided="true" name="EA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:EnumField label="Easing Method" value="Center" name="EA-ScaleMode" binding-path="entryAnimation.easeType" />
+                <uie:FloatField label="Start Scale" value="0" name="EA-StartScale" binding-path="entryAnimation.startValue" />
+                <uie:FloatField label="End Scale" value="0" name="EA-EndScale" binding-path="entryAnimation.endValue" />
+                <uie:FloatField label="Scale Speed" value="0" name="EA-ScaleSpeed" binding-path="entryAnimation.speedValue" />
+            </ui:VisualElement>
+            <ui:VisualElement name="EA-Move" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 0; display: none;">
+                <ui:Label text="Move Settings" display-tooltip-when-elided="true" name="EA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:EnumField label="Easing Method" value="Center" name="EA-MoveMode" binding-path="entryAnimation.easeType" />
+                <uie:Vector3Field label="Start Position" name="EA-StartPosition" binding-path="entryAnimation.startPosition" style="margin-top: 2px; margin-bottom: 2px;" />
+                <ui:Button text="Record Start Position" display-tooltip-when-elided="true" name="EA-RecordStartPosition" style="margin-top: 2px; margin-bottom: 2px;" />
+                <uie:Vector3Field label="End Position" name="EA-EndPosition" binding-path="entryAnimation.endPosition" style="margin-bottom: 2px; margin-top: 2px;" />
+                <ui:Button text="Record End Position" display-tooltip-when-elided="true" name="EA-RecordEndPosition" style="margin-bottom: 2px; margin-top: 2px;" />
+                <uie:FloatField label="Move Speed" value="0" name="EA-ScaleSpeed" binding-path="entryAnimation.speedValue" style="margin-top: 2px; margin-bottom: 2px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="ExitAnimation" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; background-color: rgb(174, 112, 107); padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+            <ui:VisualElement name="ExA-Core" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 10px;">
+                <ui:Label text="Exit Animation" display-tooltip-when-elided="true" name="ExA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:EnumField label="Animation Mode" value="Center" name="ExA-Mode" binding-path="exitAnimation.mode" />
+                <uie:FloatField label="Start Delay" value="0" name="ExA-StartDelay" binding-path="exitAnimation.startDelay" />
+                <uie:FloatField label="End Delay" value="0" name="ExA-EndDelay" binding-path="exitAnimation.endDelay" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ExA-Fade" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 10px; display: none;">
+                <ui:Label text="Fade Settings" display-tooltip-when-elided="true" name="ExA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:FloatField label="Start Fade" value="0" name="ExA-StartFade" binding-path="exitAnimation.startValue" />
+                <uie:FloatField label="End Fade" value="0" name="ExA-EndFade" binding-path="exitAnimation.endValue" />
+                <uie:FloatField label="Fade Speed" value="0" name="ExA-FadeSpeed" binding-path="exitAnimation.speedValue" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ExA-Scale" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 10px; display: none;">
+                <ui:Label text="Scale Settings" display-tooltip-when-elided="true" name="ExA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:EnumField label="Easing Method" value="Center" name="ExA-ScaleMode" binding-path="exitAnimation.easeType" />
+                <uie:FloatField label="Start Scale" value="0" name="ExA-StartScale" binding-path="exitAnimation.startValue" />
+                <uie:FloatField label="End Scale" value="0" name="ExA-EndScale" binding-path="exitAnimation.endValue" />
+                <uie:FloatField label="Scale Speed" value="0" name="ExA-ScaleSpeed" binding-path="exitAnimation.speedValue" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ExA-Move" style="background-color: rgb(56, 56, 56); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-bottom: 0; display: none;">
+                <ui:Label text="Move Settings" display-tooltip-when-elided="true" name="ExA-Label" style="-unity-font-style: bold; padding-bottom: 5px;" />
+                <uie:EnumField label="Easing Method" value="Center" name="ExA-MoveMode" binding-path="exitAnimation.easeType" />
+                <uie:Vector3Field label="Start Position" name="ExA-StartPosition" binding-path="exitAnimation.startPosition" style="margin-top: 2px; margin-bottom: 2px;" />
+                <ui:Button text="Record Start Position" display-tooltip-when-elided="true" name="ExA-RecordStartPosition" style="margin-top: 2px; margin-bottom: 2px;" />
+                <uie:Vector3Field label="End Position" name="ExA-EndPosition" binding-path="exitAnimation.endPosition" style="margin-bottom: 2px; margin-top: 2px;" />
+                <ui:Button text="Record End Position" display-tooltip-when-elided="true" name="ExA-RecordEndPosition" style="margin-bottom: 2px; margin-top: 2px;" />
+                <uie:FloatField label="Move Speed" value="0" name="ExA-ScaleSpeed" binding-path="exitAnimation.speedValue" style="margin-top: 2px; margin-bottom: 2px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
