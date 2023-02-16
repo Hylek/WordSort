@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -8,40 +9,43 @@ namespace Gameplay.Core
     public class WordSorter
     {
         private string _input;
-        private readonly string[] _englishDictionary;
+        private string[] _englishDictionary;
         
-        public WordSorter()
+        public WordSorter() => LoadDictionary();
+
+        private void LoadDictionary()
         {
             var path = "Assets/Resources/ukenglish.txt";
             var reader = new StreamReader(path);
         
             var content = reader.ReadToEndAsync();
-            content.Start();
-            content.Wait();
 
-            if (content.IsCompletedSuccessfully)
+            while (true)
             {
-                var result = content.Result;
-                _englishDictionary = result.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
-            }
-            else
-            {
-                Debug.LogError("Something went wrong when trying to obtain the english dictionary!");
+                if (content.IsCompletedSuccessfully)
+                {
+                    var result = content.Result;
+                    _englishDictionary = result.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
+
+                    break;
+                }
+
+                if (content.IsFaulted)
+                {
+                    Debug.LogError("Error getting dictionary!");
+                    break;
+                }
             }
             reader.Close();
         }
         
-        public void StartWordSearch(string input)
+        public List<string> StartWordSearch(string input)
         {
             _input = input;
-            ProcessInput();
+            
+            return  _englishDictionary.Where(word => word.Length >= 2).Where(word => IsWordInString(word, _input)).ToList();
         }
 
-        private void ProcessInput()
-        {
-            var words =  _englishDictionary.Where(word => word.Length >= 2).Where(word => IsWordInString(word, _input)).ToList();
-        }
-        
         private static bool IsWordInString(string word, string source)
         {
             var letterList = source.ToList();
