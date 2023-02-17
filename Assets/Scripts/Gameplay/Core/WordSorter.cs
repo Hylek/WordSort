@@ -1,50 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using UnityEngine;
+using Gameplay.Dictionary;
 
 namespace Gameplay.Core
 {
     public class WordSorter
     {
         private string _input;
-        private string[] _englishDictionary;
+        private readonly string[] _englishDictionary;
         private Dictionary<string, List<string>> _sortedDictionary;
         private readonly List<string> _combinations;
         
         public WordSorter()
         {
-            LoadDictionary();
-            SortDictionary();
             _combinations = new List<string>();
+            IDictionaryLoader loader = new DictionaryLoader();
+            _englishDictionary = loader.Load();
+            SortDictionary();
         }
-
-        private void LoadDictionary()
-        {
-            var path = "Assets/Resources/ukenglish.txt";
-            var reader = new StreamReader(path);
         
-            var content = reader.ReadToEndAsync();
-            while (true)
-            {
-                if (content.IsCompletedSuccessfully)
-                {
-                    var result = content.Result;
-                    _englishDictionary = result.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
-
-                    break;
-                }
-
-                if (content.IsFaulted)
-                {
-                    Debug.LogError("Error getting dictionary!");
-                    break;
-                }
-            }
-            reader.Close();
-        }
-
         private void SortDictionary()
         {
             _sortedDictionary = new Dictionary<string, List<string>>();
@@ -91,7 +65,6 @@ namespace Gameplay.Core
             for (var i = 0; i < input.Length; i++)
             {
                 var remaining = input.Substring(0, i) + input.Substring(i + 1);
-
                 var sortedCombo = SortByAlphabeticalOrder(input[i] + result);
                 if ((result + input[i]).Length > 1)
                 {
@@ -102,22 +75,15 @@ namespace Gameplay.Core
                     }
                     _combinations.Add(sortedCombo);
                 }
-			
                 InputCombinations_Recursive(result + input[i], remaining);
             }
         }
 
-        private static bool IsWordInString(string word, string source)
-        {
-            var letterList = source.ToList();
-
-            return word.All(letterList.Remove);
-        }
-        
         private static string SortByAlphabeticalOrder(string input)
         {
             var chars = input.ToCharArray();
             Array.Sort(chars);
+            
             return new string(chars);
         }
     }
