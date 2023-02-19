@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace Editor.Tools
 {
-    [CustomEditor(typeof(UIAnimator)), CanEditMultipleObjects]
+    [CustomEditor(typeof(Transition)), CanEditMultipleObjects]
     public class UIAnimatorEditor : UnityEditor.Editor
     {
         private VisualElement _inspector;
@@ -27,7 +27,7 @@ namespace Editor.Tools
 
         public override VisualElement CreateInspectorGUI()
         {
-            var targetScript = target as UIAnimator;
+            var targetScript = target as Transition;
             _gameObject = targetScript!.gameObject;
 
             var visualTree =

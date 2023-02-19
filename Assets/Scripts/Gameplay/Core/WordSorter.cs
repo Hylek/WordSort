@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gameplay.Dictionary;
+using UnityEngine;
 
 namespace Gameplay.Core
 {
@@ -36,6 +37,7 @@ namespace Gameplay.Core
                     _sortedDictionary.Add(sortedWord, list);
                 }
             }
+            Debug.Log("Dictionary is ready!");
         }
         
         public List<string> StartWordSearch(string input)

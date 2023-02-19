@@ -28,7 +28,7 @@ namespace Tools
         Sprite
     }
 
-    public class UIAnimator : MonoBehaviour
+    public class Transition : MonoBehaviour, ITransitionController
     {
         public UIAnimatorData entryAnimation, exitAnimation;
         public Action<bool> TransitionComplete { get; set; }
